@@ -1,0 +1,26 @@
+{
+  "private": true,
+  "name": "hello-react-redux-tutorial",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": "https://github.com/yszk0123/hello-react-redux-tutorial.git",
+  "author": "Yuji Suzuki <y0suzuki0123@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "expect": "^1.20.2",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.5",
+    "redux": "^3.6.0"
+  },
+  "devDependencies": {
+    "prettier": "^1.4.4",
+    "react-scripts": "1.0.7"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "format": "prettier './src/**/*.js' --write --single-quote --trailing-comma all"
+  }
+}
