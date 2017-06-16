@@ -21,15 +21,17 @@ expect(counter(undefined, {})).toEqual(0);
 console.log('all test passed!');
 
 const store = createStore(counter);
-console.log(store.getState());
 
-store.dispatch({ type: 'INCREMENT' });
-console.log(store.getState());
-
-store.subscribe(() => {
+function render() {
   document.body.innerText = store.getState();
-});
+}
 
-document.addEventListener('click', () => {
+function onClick() {
   store.dispatch({ type: 'INCREMENT' });
-});
+}
+
+store.subscribe(render);
+
+document.addEventListener('click', onClick);
+
+render();
