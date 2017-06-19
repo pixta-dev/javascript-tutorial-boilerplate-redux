@@ -2,8 +2,7 @@ import expect from 'expect';
 import deepFreeze from 'deep-freeze';
 
 function addCounter(list) {
-  list.push(0);
-  return list;
+  return [...list, 0];
 }
 function testAddCounter() {
   const listBefore = [];
