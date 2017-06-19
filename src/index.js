@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './avoiding-array-mutations';
 import './avoiding-object-mutations';
+import './writing-a-todo-list-reducer';
 import './index.css';
 
 function counter(state = 0, action) {
