@@ -1,5 +1,7 @@
 import expect from 'expect';
 import { createStore } from 'redux';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import './index.css';
 
 function counter(state = 0, action) {
@@ -22,8 +24,15 @@ console.log('all test passed!');
 
 const store = createStore(counter);
 
+function Counter({ value }) {
+  return <h1>{value}</h1>;
+}
+
 function render() {
-  document.body.innerText = store.getState();
+  ReactDOM.render(
+    <Counter value={store.getState()} />,
+    document.getElementById('root'),
+  );
 }
 
 function onClick() {
@@ -31,7 +40,6 @@ function onClick() {
 }
 
 store.subscribe(render);
-
 document.addEventListener('click', onClick);
 
 render();
