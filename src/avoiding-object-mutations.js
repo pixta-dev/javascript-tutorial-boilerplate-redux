@@ -2,8 +2,7 @@ import expect from 'expect';
 import deepFreeze from 'deep-freeze';
 
 function toggleTodo(todo) {
-  todo.completed = !todo.completed;
-  return todo;
+  return { ...todo, completed: !todo.completed };
 }
 function testToggleTodo() {
   const todoBefore = {
