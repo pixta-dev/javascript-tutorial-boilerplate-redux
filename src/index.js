@@ -24,22 +24,27 @@ console.log('all test passed!');
 
 const store = createStore(counter);
 
-function Counter({ value }) {
-  return <h1>{value}</h1>;
+function Counter({ value, onIncrement, onDecrement }) {
+  return (
+    <div>
+      <h1>{value}</h1>
+      <button onClick={onIncrement}>+</button>
+      <button onClick={onDecrement}>-</button>
+    </div>
+  );
 }
 
 function render() {
   ReactDOM.render(
-    <Counter value={store.getState()} />,
+    <Counter
+      value={store.getState()}
+      onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
+      onDecrement={() => store.dispatch({ type: 'DECREMENT' })}
+    />,
     document.getElementById('root'),
   );
 }
 
-function onClick() {
-  store.dispatch({ type: 'INCREMENT' });
-}
-
 store.subscribe(render);
-document.addEventListener('click', onClick);
 
 render();
