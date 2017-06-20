@@ -1,5 +1,6 @@
 import expect from 'expect';
 import deepFreeze from 'deep-freeze';
+import { combineReducers } from 'redux';
 
 function visibilityFilter(state = 'SHOW_ALL', action) {
   switch (action.type) {
@@ -98,12 +99,10 @@ function testToggleTodo() {
   expect(todos(stateBefore, action)).toEqual(stateAfter);
 }
 
-function todoApp(state = {}, action) {
-  return {
-    todos: todos(state.todos, action),
-    visibilityFilter: visibilityFilter(state.visibilityFilter, action),
-  };
-}
+const todoApp = combineReducers({
+  todos,
+  visibilityFilter,
+});
 
 testAddTodo();
 testToggleTodo();
