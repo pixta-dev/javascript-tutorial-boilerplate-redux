@@ -15,4 +15,4 @@ function testAddCounter() {
 }
 
 testAddCounter();
-console.log('[avoiding-array-mutations]: all tests passed!');
+console.log('[avoiding-array-mutations] all tests passed.');
