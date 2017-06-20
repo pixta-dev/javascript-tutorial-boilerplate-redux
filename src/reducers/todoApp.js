@@ -1,6 +1,6 @@
 import expect from 'expect';
 import deepFreeze from 'deep-freeze';
-import { combineReducers } from 'redux';
+import combineReducers from '../utils/combineReducers';
 
 function visibilityFilter(state = 'SHOW_ALL', action) {
   switch (action.type) {
