@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import AddTodo from './components/AddTodo';
 import Footer from './components/Footer';
@@ -21,43 +21,40 @@ function getVisibleTodos(todos, filter) {
   }
 }
 
-export default class TodoApp extends Component {
-  render() {
-    const { todos, visibilityFilter } = this.props;
-    const visibleTodos = getVisibleTodos(todos, visibilityFilter);
+export default function TodoApp({ todos, visibilityFilter }) {
+  const visibleTodos = getVisibleTodos(todos, visibilityFilter);
 
-    return (
-      <div>
-        <AddTodo
-          onAddClick={text => {
-            store.dispatch({
-              type: 'ADD_TODO',
-              text,
-              id: nextTodoId++,
-            });
-          }}
-        />
-        <TodoList
-          todos={visibleTodos}
-          onTodoClick={id => {
-            store.dispatch({
-              type: 'TOGGLE_TODO',
-              id,
-            });
-          }}
-        />
-        <Footer
-          visibilityFilter={visibilityFilter}
-          onFilterClick={filter => {
-            store.dispatch({
-              type: 'SET_VISIBILITY_FILTER',
-              filter,
-            });
-          }}
-        />
-      </div>
-    );
-  }
+  return (
+    <div>
+      <AddTodo
+        onAddClick={text => {
+          store.dispatch({
+            type: 'ADD_TODO',
+            text,
+            id: nextTodoId++,
+          });
+        }}
+      />
+      <TodoList
+        todos={visibleTodos}
+        onTodoClick={id => {
+          store.dispatch({
+            type: 'TOGGLE_TODO',
+            id,
+          });
+        }}
+      />
+      <Footer
+        visibilityFilter={visibilityFilter}
+        onFilterClick={filter => {
+          store.dispatch({
+            type: 'SET_VISIBILITY_FILTER',
+            filter,
+          });
+        }}
+      />
+    </div>
+  );
 }
 
 function render() {
