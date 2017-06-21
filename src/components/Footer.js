@@ -1,7 +1,7 @@
 import React from 'react';
 
-function FilterLink({ filter, children, currentFilter, onClick }) {
-  if (filter === currentFilter) {
+function Link({ active, children, onClick }) {
+  if (active) {
     return <span>{children}</span>;
   }
 
@@ -10,11 +10,24 @@ function FilterLink({ filter, children, currentFilter, onClick }) {
       href="#"
       onClick={event => {
         event.preventDefault();
-        onClick(filter);
+        onClick();
       }}
     >
       {children}
     </a>
+  );
+}
+
+function FilterLink({ filter, children, currentFilter, onClick }) {
+  return (
+    <Link
+      active={filter === currentFilter}
+      onClick={() => {
+        onClick(filter);
+      }}
+    >
+      {children}
+    </Link>
   );
 }
 
