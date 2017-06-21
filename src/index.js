@@ -1,6 +1,7 @@
 import { createStore } from 'redux';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import AddTodo from './components/AddTodo';
 import TodoList from './components/TodoList';
 import todoApp from './reducers/todoApp';
 
@@ -47,24 +48,15 @@ export default class TodoApp extends Component {
 
     return (
       <div>
-        <input
-          ref={node => {
-            this.input = node;
-          }}
-        />
-        <button
-          onClick={() => {
+        <AddTodo
+          onAddClick={text => {
             store.dispatch({
               type: 'ADD_TODO',
-              text: this.input.value,
+              text,
               id: nextTodoId++,
             });
-
-            this.input.value = '';
           }}
-        >
-          Add Todo
-        </button>
+        />
         <TodoList
           todos={visibleTodos}
           onTodoClick={id => {
