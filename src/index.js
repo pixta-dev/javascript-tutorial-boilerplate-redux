@@ -5,20 +5,10 @@ import Footer from './components/Footer';
 import VisibleTodoList from './components/VisibleTodoList';
 import store from './store';
 
-let nextTodoId = 0;
-
 export default function TodoApp() {
   return (
     <div>
-      <AddTodo
-        onAddClick={text => {
-          store.dispatch({
-            type: 'ADD_TODO',
-            text,
-            id: nextTodoId++,
-          });
-        }}
-      />
+      <AddTodo />
       <VisibleTodoList />
       <Footer />
     </div>
