@@ -1,12 +1,9 @@
-import { createStore } from 'redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AddTodo from './components/AddTodo';
 import Footer from './components/Footer';
 import TodoList from './components/TodoList';
-import todoApp from './reducers/todoApp';
-
-const store = createStore(todoApp);
+import store from './store';
 
 let nextTodoId = 0;
 
