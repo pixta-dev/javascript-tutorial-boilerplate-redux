@@ -6,8 +6,44 @@ import todoApp from './reducers/todoApp';
 const store = createStore(todoApp);
 
 let nextTodoId = 0;
+
+function getVisibleTodos(todos, filter) {
+  switch (filter) {
+    case 'SHOW_ALL':
+      return todos;
+    case 'SHOW_COMPLETED':
+      return todos.filter(t => t.completed);
+    case 'SHOW_ACTIVE':
+      return todos.filter(t => !t.completed);
+  }
+}
+
+function FilterLink({ filter, children, currentFilter }) {
+  if (filter === currentFilter) {
+    return <span>{children}</span>;
+  }
+
+  return (
+    <a
+      href="#"
+      onClick={event => {
+        event.preventDefault();
+        store.dispatch({
+          type: 'SET_VISIBILITY_FILTER',
+          filter,
+        });
+      }}
+    >
+      {children}
+    </a>
+  );
+}
+
 export default class TodoApp extends Component {
   render() {
+    const { todos, visibilityFilter } = this.props;
+    const visibleTodos = getVisibleTodos(todos, visibilityFilter);
+
     return (
       <div>
         <input
@@ -29,7 +65,7 @@ export default class TodoApp extends Component {
           Add Todo
         </button>
         <ul>
-          {this.props.todos.map(todo =>
+          {visibleTodos.map(todo =>
             <li
               key={todo.id}
               onClick={() => {
@@ -46,6 +82,21 @@ export default class TodoApp extends Component {
             </li>,
           )}
         </ul>
+        <p>
+          Show:
+          {' '}
+          <FilterLink filter="SHOW_ALL" currentFilter={visibilityFilter}>
+            All
+          </FilterLink>
+          {' '}
+          <FilterLink filter="SHOW_ACTIVE" currentFilter={visibilityFilter}>
+            Active
+          </FilterLink>
+          {' '}
+          <FilterLink filter="SHOW_COMPLETED" currentFilter={visibilityFilter}>
+            Completed
+          </FilterLink>
+        </p>
       </div>
     );
   }
@@ -53,7 +104,7 @@ export default class TodoApp extends Component {
 
 function render() {
   ReactDOM.render(
-    <TodoApp todos={store.getState().todos} />,
+    <TodoApp {...store.getState()} />,
     document.getElementById('root'),
   );
 }
